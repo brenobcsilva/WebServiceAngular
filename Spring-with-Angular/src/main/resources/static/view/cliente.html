@@ -1,0 +1,71 @@
+<style>
+
+fieldset {
+	display:inline;
+}
+
+</style>
+
+<div>
+	Oi :D {{cliente.nome}}
+	
+	<form novalidate name="frmCliente">
+	<div>
+	<label>Nome:</label>
+	<input type="text" ng-minlength="2" name="txtNome" ng-model="cliente.nome" required/>
+	<span ng-show="frmCliente.txtNome.$error.required && frmCliente.txtNome.$dirty">Campo Nome Obrigatorio</span>
+	
+	</div>
+	
+	<div>
+	<label>Email:</label>
+	<input type="email" name="txtEmail" ng-model="cliente.email" required/>
+	<span ng-show="false">Campo Email Obrigatorio</span>
+	<span ng-show="frmCliente.txtNome.$error.email">Campo Email invalido</span>
+	</div>
+	
+	
+	
+	<input type="button" value="Salvar" ng-click="salvarCliente()" ng-disabled="{{frmCliente.$invalid}}"/>
+	<input type="button" value="Cancelar" ng-click="cancelarAlteracaoCliente()"ng-disabled="{{frmCliente.$invalid}}"/>
+	
+	<div >
+	<fieldset>
+	<legend>Formulario</legend>
+	Valid: {{ frmCliente.$valid }}
+	Pristine: {{frmCliente.$pristine}}
+	</fieldset>
+	
+	<fieldset>
+	<legend>Nome</legend>
+	Valid: {{ frmCliente.txtNome.$valid }}<br/>
+	Invalid: {{frmCliente.txtNome.$invalid}}<br/>
+	Pristine: {{frmCliente.txtNome.$pristine}}<br/>
+	Dirty: {{frmCliente.txtNome.$dirty}}<br/>
+	Touched: {{frmCliente.txtNome.$touched}}<br/>
+	Error Required: {{frmCliente.txtNome.$error.required}}<br/>
+	Error Min Length: {{frmCliente.txtNome.$error.minlength}}<br/>
+	Error Max length: {{frmCliente.txtNome.$error.minlength}}
+	</fieldset>
+	
+	<fieldset>
+	<legend>Email</legend>
+	Valid: {{ frmCliente.txtNome.$valid }}<br/>
+	Invalid: {{frmCliente.txtNome.$invalid}}<br/>
+	Pristine: {{frmCliente.txtNome.$pristine}}<br/>
+	Dirty: {{frmCliente.txtNome.$dirty}}<br/>
+	Touched: {{frmCliente.txtNome.$touched}}<br/>
+	Error Required: {{frmCliente.txtNome.$error.required && frmCliente.txtNome.$dirty}}
+	</fieldset>
+	</div>
+	
+	
+	</form>
+	
+	<div ng-repeat="cli in clientes">
+		{{ cli.id + ' | ' + cli.nome}}
+		<input type="button" value="Excluir" ng-click="excluirCliente(cli)"/>
+		<input type="button" value="Alterar" ng-click="alterarCliente(cli)"/>
+		<a href="clientes/{{cli.id}}">Detalhe</a>
+	</div>
+</div>
